@@ -96,6 +96,22 @@ bool Complex::operator!=(const Complex &other) const noexcept {
     return !(*this == other);
 }
 
+bool Complex::operator==(double other) const noexcept {
+    return (*this == Complex{ other });
+}
+
+bool Complex::operator!=(double other) const noexcept {
+    return !(*this == Complex{ other });
+}
+
+bool operator==(double other, const Complex &complex) noexcept {
+    return (complex == other);
+}
+
+bool operator!=(double other, const Complex &complex) noexcept {
+    return !(complex == other);
+}
+
 std::ostream &operator<<(std::ostream &out, const Complex &complex) {
     out << '(' << complex.real << ", " << complex.img << ')';
     return out;

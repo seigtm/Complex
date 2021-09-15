@@ -61,32 +61,10 @@ public:
     // Comparison operators.
     bool operator==(const Complex &other) const noexcept;
     bool operator!=(const Complex &other) const noexcept;
-
-    template<class T>
-    bool operator==(const T &other) const {
-        if(!isEqual(img, 0.0))
-            return false;
-
-        return isEqual(real, other);
-    }
-
-    template<class T>
-    bool operator!=(const T &other) const {
-        if(isEqual(img, 0.0))
-            return !isEqual(real, other);
-
-        return true;
-    }
-
-    template<class T>
-    friend bool operator==(const T &other, const Complex &complex) {
-        return complex == other;
-    }
-
-    template<class T>
-    friend bool operator!=(const T &other, const Complex &complex) {
-        return complex != other;
-    }
+    bool operator==(double other) const noexcept;
+    bool operator!=(double other) const noexcept;
+    friend bool operator==(double other, const Complex &complex) noexcept;
+    friend bool operator!=(double other, const Complex &complex) noexcept;
 
     // Bitwise operators.
     friend std::ostream &operator<<(std::ostream &out, const Complex &complex);
