@@ -76,20 +76,9 @@ Complex sin(const Complex &complex) {
     return { (std::sin(complex.real) * std::cosh(complex.img)), (std::cos(complex.real) * std::sinh(complex.img)) };
 }
 
-Complex Complex::operator++(int) {  // ++x.
-    Complex result{ *this };
-    real++;
-    return result;
-}
-
-Complex Complex::operator--(int) {  // --x.
-    Complex result{ *this };
-    real--;
-    return result;
-}
-
 bool Complex::operator==(const Complex &other) const noexcept {
-    return (isEqual(other.real, real) && isEqual(other.img, img));
+    constexpr double epsilon{ 2.22e-12L };
+    return abs(*this - other) <= epsilon;
 }
 
 bool Complex::operator!=(const Complex &other) const noexcept {
@@ -122,19 +111,17 @@ std::istream &operator>>(std::istream &in, Complex &complex) {
     return in;
 }
 
-Complex &Complex::operator--() {  // x--.
-    real--;
-    return *this;
-}
-
-Complex &Complex::operator++() {  // x++.
-    real++;
-    return *this;
-}
-
 Complex Complex::operator/(const Complex &other) const {
     Complex result{ *this };
     return (result /= other);
+}
+
+double Complex::getReal() const noexcept {
+    return real;
+}
+
+double Complex::getImg() const noexcept {
+    return img;
 }
 
 Complex Complex::operator*(const Complex &other) const {
@@ -152,38 +139,37 @@ Complex Complex::operator+(const Complex &other) const {
     return (result += other);
 }
 
-Complex operator+(double value, Complex complex) {
+Complex operator+(double value, const Complex &complex) {
     return (complex + value);
 }
 
-Complex operator-(double value, Complex complex) {
+Complex operator-(double value, const Complex &complex) {
     return (Complex{ value } - complex);
 }
 
-Complex operator*(double value, Complex complex) {
+Complex operator*(double value, const Complex &complex) {
     return (complex * value);
 }
 
-Complex operator/(double value, Complex complex) {
+Complex operator/(double value, const Complex &complex) {
     return (Complex{ value } / complex);
 }
 
-Complex pow(Complex complex, double power) {
-    double modulus{ std::abs(std::sqrt(complex.real * complex.real + complex.img * complex.img)) };
+Complex pow(const Complex &complex, double power) {
     double phi{ std::atan(complex.img / complex.real) };
     double real{ std::cos(phi * power) };
     double img{ std::sin(phi * power) };
-    double modulusPower{ std::pow(modulus, power) };
+    double modulusPower{ std::pow(abs(complex), power) };
 
     return { modulusPower * real, modulusPower * img };
 }
 
-Complex nrt(Complex complex, double power) {
-    return pow(complex, 1.0 / power);
+Complex nrt(const Complex &complex, double power) {
+    return pow(complex, static_cast<double>(1.0 / power));
 }
 
-bool Complex::isEqual(double a, double b) const noexcept {
-    return std::fabs(a - b) <= std::numeric_limits<double>::epsilon();
+double abs(const Complex &complex) {
+    return std::sqrt(complex.real * complex.real + complex.img * complex.img);
 }
 
 }  // namespace setm

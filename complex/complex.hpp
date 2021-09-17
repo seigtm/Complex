@@ -16,7 +16,7 @@ public:
     Complex &operator+=(const Complex &other);
     Complex operator+(const Complex &other) const;
     Complex operator+(double value) const;
-    friend Complex operator+(double value, Complex complex);
+    friend Complex operator+(double value, const Complex &complex);
 
     // Unary operators.
     Complex operator-() const noexcept;
@@ -26,37 +26,19 @@ public:
     Complex &operator-=(const Complex &other);
     Complex operator-(const Complex &other) const;
     Complex operator-(double value) const;
-    friend Complex operator-(double value, Complex complex);
+    friend Complex operator-(double value, const Complex &complex);
 
     // Multiplication operators.
     Complex &operator*=(const Complex &other);
     Complex operator*(const Complex &other) const;
     Complex operator*(double value) const;
-    friend Complex operator*(double value, Complex complex);
+    friend Complex operator*(double value, const Complex &complex);
 
     // Division operators.
     Complex &operator/=(const Complex &other);
     Complex operator/(const Complex &other) const;
     Complex operator/(double value) const;
-    friend Complex operator/(double value, Complex complex);
-
-    // Exponentiation using de Moivre's formula.
-    friend Complex pow(Complex complex, double power);
-
-    // nth root using power.
-    friend Complex nrt(Complex complex, double power);
-
-    // Trigonometric functions.
-    friend Complex sin(const Complex &complex);
-    friend Complex cos(const Complex &complex);
-
-    // Increment operators.
-    Complex &operator++();    // x++.
-    Complex operator++(int);  // ++x.
-
-    // Decrement operators.
-    Complex &operator--();    // x--.
-    Complex operator--(int);  // --x.
+    friend Complex operator/(double value, const Complex &complex);
 
     // Comparison operators.
     bool operator==(const Complex &other) const noexcept;
@@ -70,26 +52,22 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const Complex &complex);
     friend std::istream &operator>>(std::istream &in, Complex &complex);
 
-    // Friend functions:
-    friend Complex operator+(double value, Complex complex);
-    friend Complex operator-(double value, Complex complex);
-    friend Complex operator*(double value, Complex complex);
-    friend Complex operator/(double value, Complex complex);
+    // Trigonometric.
+    friend double abs(const Complex &complex);   // Magnitude.
+    friend Complex sin(const Complex &complex);  // Sine.
+    friend Complex cos(const Complex &complex);  // Cosine.
 
-    friend Complex sin(const Complex &complex);
-    friend Complex cos(const Complex &complex);
+    // Exponentiation and nth root.
+    friend Complex pow(const Complex &complex, double power);  // Exponentiation using de Moivre's formula.
+    friend Complex nrt(const Complex &complex, double power);  // nth root using pow().
 
-    friend Complex pow(Complex complex, double power);  // Exponentiation.
-    friend Complex nrt(Complex complex, double power);  // nth root.
-
-    friend std::ostream &operator<<(std::ostream &out, const Complex &complex);
-    friend std::istream &operator>>(std::istream &in, Complex &complex);
+    // Real and imaginary parts getters.
+    double getReal() const noexcept;
+    double getImg() const noexcept;
 
 private:
     double real;
     double img;
-
-    bool isEqual(double a, double b) const noexcept;
 };
 
 }  // namespace setm
