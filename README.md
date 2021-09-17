@@ -33,7 +33,5 @@ Complex(double r, double i = 0);
 - exponentiation (using [de Moivre's formula](https://en.wikipedia.org/wiki/De_Moivre%27s_formula));
 - nth root (using power);
 - trigonometric (sin and cos);
-- increment;
-- decrement;
 - comparison (equality);
 - bitwise (for std::cin and std::cout).
