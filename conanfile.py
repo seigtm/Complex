@@ -3,7 +3,7 @@ from conans import ConanFile
 
 class Complex(ConanFile):
     name = "Complex"
-    version = "1.0.0"
+    version = "1.1.0"
     author = "Baranov Konstantin (seigtm@gmail.com)"
     url = "https://github.com/seigtm/Complex"
     description = "A simple complex numbers class that supports all basic operations"
