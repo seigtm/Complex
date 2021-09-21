@@ -1,6 +1,6 @@
 # CMake basic setup.
 cmake_minimum_required(VERSION 3.5)
-project(ComplexTests VERSION 1.1.0 LANGUAGES CXX)
+project(Complex VERSION 1.3.0 LANGUAGES CXX)
 message("!- Project: " ${PROJECT_NAME})
 
 # C++ 17 standart required.
@@ -12,6 +12,9 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 # Activate the call to the macro conan_target_link_libraries().
 conan_basic_setup(TARGETS)
 
+# Add the 'complex' subdirectory to the build.
+add_subdirectory(complex)
+
 # Add 'main' and 'tests' sources to the main executable.
 add_executable(main src/main.cpp src/ut/complexTests.cpp)
 
@@ -22,12 +25,8 @@ target_include_directories(main
             ${PROJECT_SOURCE_DIR}/src/ut
 )
 
-# Add the 'complex' subdirectory to the build.
-add_subdirectory(complex)
-
 # Link all libraries to the executable.
 target_link_libraries(main PRIVATE complex CONAN_PKG::gtest)
-
 message("!- Conan libs: " ${CONAN_LIBS})
 
 if(CODE_COVERAGE)
