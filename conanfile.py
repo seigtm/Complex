@@ -8,7 +8,7 @@ class Complex(ConanFile):
     url = "https://github.com/seigtm/Complex"
     description = "A simple complex numbers class that supports all basic operations"
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake"
+    generators = "cmake", "visual_studio"
 
     build_requires = \
         "gtest/[1.11]"

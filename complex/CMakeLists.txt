@@ -8,9 +8,10 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # Make the shared 'complex' library.
 add_library(complex SHARED complex.hpp complex.cpp)
 
-if (CMAKE_BUILD_TYPE MATCHES Debug)
+if(CODE_COVERAGE)
+    message("!- Using code coverage")
     # Use CodeCoverage for coverage reports.
-    include(${PROJECT_SOURCE_DIR}/../cmake/CodeCoverage.cmake)
+    include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
     append_coverage_compiler_flags()
     setup_target_for_coverage_gcovr_html(NAME complexcov EXECUTABLE main)
-ENDIF()
+endif()

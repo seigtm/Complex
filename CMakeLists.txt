@@ -30,9 +30,10 @@ target_link_libraries(main PRIVATE complex CONAN_PKG::gtest)
 
 message("!- Conan libs: " ${CONAN_LIBS})
 
-if (CMAKE_BUILD_TYPE MATCHES Debug)
+if(CODE_COVERAGE)
+    message("!- Using code coverage")
     # Use CodeCoverage for coverage reports.
     include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
     append_coverage_compiler_flags()
     setup_target_for_coverage_gcovr_html(NAME maincov EXECUTABLE main)
-ENDIF()
+endif()
