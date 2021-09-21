@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include "complex.hpp"
+#include <complex.hpp>
 
 using namespace setm;
 

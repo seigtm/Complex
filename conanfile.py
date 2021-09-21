@@ -3,7 +3,7 @@ from conans import ConanFile, CMake
 
 class Complex(ConanFile):
     name = "Complex"
-    version = "1.3.0"
+    version = "1.4.0"
 
     # Metadata.
     author = "Baranov Konstantin (seigtm@gmail.com)"
@@ -36,3 +36,6 @@ class Complex(ConanFile):
         cmake = CMake(self)
         cmake.configure(source_folder = self.name)
         cmake.install()
+
+    def package_info(self):
+        self.cpp_info.libs = ["libcomplex.a"]

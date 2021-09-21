@@ -1,6 +1,6 @@
 # CMake basic setup.
 cmake_minimum_required(VERSION 3.5)
-project(Complex VERSION 1.3.0 LANGUAGES CXX)
+project(Complex VERSION 1.4.0 LANGUAGES CXX)
 message("!- Project: " ${PROJECT_NAME})
 
 # C++ 17 standart required.
