@@ -8,9 +8,11 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # Make the shared 'complex' library.
 add_library(complex SHARED complex.hpp complex.cpp)
 
-# Turn off optimization for non-skewed coverage reports.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
-# Use CodeCoverage for coverage reports.
-include(${PROJECT_SOURCE_DIR}/../cmake/CodeCoverage.cmake)
-append_coverage_compiler_flags()
-setup_target_for_coverage_gcovr_html(NAME complexcov EXECUTABLE main)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    # Turn off optimization for non-skewed coverage reports.
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0")
+    # Use CodeCoverage for coverage reports.
+    include(${PROJECT_SOURCE_DIR}/../cmake/CodeCoverage.cmake)
+    append_coverage_compiler_flags()
+    setup_target_for_coverage_gcovr_html(NAME complexcov EXECUTABLE main)
+ENDIF()
