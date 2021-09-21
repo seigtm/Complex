@@ -31,8 +31,6 @@ target_link_libraries(main PRIVATE complex CONAN_PKG::gtest)
 message("!- Conan libs: " ${CONAN_LIBS})
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    # Turn off optimization for non-skewed coverage reports.
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0")
     # Use CodeCoverage for coverage reports.
     include(${PROJECT_SOURCE_DIR}/cmake/CodeCoverage.cmake)
     append_coverage_compiler_flags()

@@ -9,8 +9,6 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(complex SHARED complex.hpp complex.cpp)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    # Turn off optimization for non-skewed coverage reports.
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0")
     # Use CodeCoverage for coverage reports.
     include(${PROJECT_SOURCE_DIR}/../cmake/CodeCoverage.cmake)
     append_coverage_compiler_flags()
