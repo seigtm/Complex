@@ -41,9 +41,8 @@ Complex Complex::operator-(double value) const {
 }
 
 Complex &Complex::operator*=(const Complex &other) {
-    double tempReal, tempImg;
-    tempReal = (real * other.real) - (img * other.img);
-    tempImg = (img * other.real) + (real * other.img);
+    const double tempReal{ real * other.real - img * other.img };
+    const double tempImg{ img * other.real + real * other.img };
     real = tempReal;
     img = tempImg;
     return *this;
@@ -55,9 +54,8 @@ Complex Complex::operator*(double value) const {
 }
 
 Complex &Complex::operator/=(const Complex &other) {
-    double tempReal, tempImg;
-    tempReal = ((real * other.real) + (img * other.img)) / (other.real * other.real + other.img * other.img);
-    tempImg = ((img * other.real) - (real * other.img)) / (other.real * other.real + other.img * other.img);
+    const double tempReal{ ((real * other.real) + (img * other.img)) / (other.real * other.real + other.img * other.img) };
+    const double tempImg{ ((img * other.real) - (real * other.img)) / (other.real * other.real + other.img * other.img) };
     real = tempReal;
     img = tempImg;
     return *this;
@@ -156,10 +154,10 @@ Complex operator/(double value, const Complex &complex) {
 }
 
 Complex pow(const Complex &complex, double power) {
-    double phi{ std::atan(complex.img / complex.real) };
-    double real{ std::cos(phi * power) };
-    double img{ std::sin(phi * power) };
-    double modulusPower{ std::pow(abs(complex), power) };
+    const double phi{ std::atan(complex.img / complex.real) };
+    const double real{ std::cos(phi * power) };
+    const double img{ std::sin(phi * power) };
+    const double modulusPower{ std::pow(abs(complex), power) };
 
     return { modulusPower * real, modulusPower * img };
 }

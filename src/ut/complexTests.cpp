@@ -7,7 +7,7 @@
 using namespace setm;
 
 TEST(ComplexTests, Assigment) {
-    Complex first{ 5, -5 };
+    const Complex first{ 5, -5 };
     Complex second;
     // (5 - 5 * i) != 0
     EXPECT_NE(first, second);
