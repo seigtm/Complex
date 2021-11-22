@@ -1,6 +1,11 @@
 # CMake basic setup.
 cmake_minimum_required(VERSION 3.5)
-project(ComplexTests VERSION 1.5.0 LANGUAGES CXX)
+project(ComplexExample VERSION 1.5.0 LANGUAGES CXX)
+
+# Build shared gtest library.
+if (NOT BUILD_SHARED_LIBS)
+    set(BUILD_SHARED_LIBS ON)
+endif()
 
 # C++ 17 standart required.
 set(CMAKE_CXX_STANDARD 17)
@@ -9,25 +14,15 @@ set(CMAKE_CXX_STANDARD 17)
 add_subdirectory(complex)
 add_subdirectory(googletest)
 
-# Build shared gtest library.
-if (NOT BUILD_SHARED_LIBS)
-    set(BUILD_SHARED_LIBS ON)
-endif()
-
-# Add 'main' and 'tests' sources to the main executable.
-add_executable(main
-    src/main.cpp
-    src/ut/complexTests.cpp
+# Add 'main' source to the main executable.
+add_executable(${CMAKE_PROJECT_NAME}
+    main.cpp
 )
 
-# Specifies include directories to use when compiling a given target.
-target_include_directories(main PUBLIC
-    ${PROJECT_SOURCE_DIR}/complex
-    ${PROJECT_SOURCE_DIR}/src/ut
-)
-
-# Link all libraries to the executable.
-target_link_libraries(main PRIVATE
+# Link Complex lib to the executable.
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     Complex
-    gtest
 )
+
+# Before create "main" build target "Run_ComplexTests".
+add_dependencies(${CMAKE_PROJECT_NAME} Run_ComplexTests)

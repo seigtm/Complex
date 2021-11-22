@@ -133,3 +133,11 @@ TEST(ComplexTests, Trigonometric) {
     // (1 + 1 * i) magnitude is always ~1.4142135623730951.
     EXPECT_EQ(abs(Complex(1, 1)), 1.4142135623730951);
 }
+
+using ::testing::InitGoogleTest;
+
+int main(int argc, char *argv[]) {
+    InitGoogleTest(&argc, argv);
+
+    return RUN_ALL_TESTS();
+}

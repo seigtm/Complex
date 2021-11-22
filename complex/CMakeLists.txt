@@ -6,6 +6,8 @@ project(Complex VERSION 1.5.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 # Make the shared 'complex' library.
-install(FILES ${CMAKE_CURRENT_LIST_DIR}/complex.hpp DESTINATION "include/complex/")
+add_subdirectory(ut)
+# install(FILES ${CMAKE_CURRENT_LIST_DIR}/complex.hpp DESTINATION "include/complex/")
 add_library(${PROJECT_NAME} SHARED complex.hpp complex.cpp)
-install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+target_include_directories(${PROJECT_NAME} INTERFACE .)
+# install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

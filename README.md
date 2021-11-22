@@ -40,7 +40,7 @@ Complex(double r, double i = 0);
 ## Cloning the repository:
 
 ```bash
-bash> git clone https://github.com/seigtm/Complex
+bash> git clone https://github.com/seigtm/Complex --recurse-submodules
 ```
 
 ---
@@ -59,10 +59,11 @@ To build and run the project with `cmake`, execute:
 bash> cmake . -B build
 bash> cd build
 bash> cmake --build .
-bash> ./main
+bash> ./ComplexExample
 ```
 
 > One line version:
+>
 > ```bash
-> bash> cmake . -B build && cd build && cmake --build . && ./main
+> bash> cmake . -B build && cd build && cmake --build . && ./ComplexExample
 > ```
