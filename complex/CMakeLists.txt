@@ -1,7 +1,11 @@
-# Turn on symbol export to make the shared library.
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-# Make the static 'complex' library.
-add_library(complex STATIC complex.hpp complex.cpp)
+# CMake basic setup.
+cmake_minimum_required(VERSION 3.5)
+project(Complex VERSION 1.5.0 LANGUAGES CXX)
 
+# C++ 17 standart required.
+set(CMAKE_CXX_STANDARD 17)
+
+# Make the shared 'complex' library.
 install(FILES ${CMAKE_CURRENT_LIST_DIR}/complex.hpp DESTINATION "include/complex/")
-install(TARGETS complex LIBRARY DESTINATION lib)
+add_library(${PROJECT_NAME} SHARED complex.hpp complex.cpp)
+install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
