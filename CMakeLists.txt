@@ -31,3 +31,15 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Before create "main" build target "Run_ComplexTests".
 add_dependencies(${CMAKE_PROJECT_NAME} Run_ComplexTests)
+
+# Deploy project.
+if (DEPLOY)
+    SET(${result} "ERROR")
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+        COMMAND "${CMAKE_SOURCE_DIR}/scripts/deploy.sh"
+            "${CMAKE_SOURCE_DIR}/build/ComplexExample"          # Executable path.
+            "${CMAKE_SOURCE_DIR}/build/complex/libComplex.so"   # Library path.
+            "${CMAKE_SOURCE_DIR}/deploy"                        # Destination path.
+        COMMENT "Running deploy"
+    )
+endif()
