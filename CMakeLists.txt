@@ -7,6 +7,11 @@ if (NOT BUILD_SHARED_LIBS)
     set(BUILD_SHARED_LIBS ON)
 endif()
 
+# Linker flag to search for libComplex in executable path.
+SET(CMAKE_EXE_LINKER_FLAGS 
+    "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,."
+)
+
 # C++ 17 standart required.
 set(CMAKE_CXX_STANDARD 17)
 
