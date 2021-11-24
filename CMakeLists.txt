@@ -34,7 +34,6 @@ add_dependencies(${CMAKE_PROJECT_NAME} Run_ComplexTests)
 
 # Deploy project.
 if (DEPLOY)
-    SET(${result} "ERROR")
     add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
         COMMAND "${CMAKE_SOURCE_DIR}/scripts/deploy.sh"
             "${CMAKE_SOURCE_DIR}/build/ComplexExample"          # Executable path.
